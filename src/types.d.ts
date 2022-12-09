@@ -1,0 +1,1 @@
+type Pages = "Home" | "Simulation"
