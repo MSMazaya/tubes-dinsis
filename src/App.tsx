@@ -15,6 +15,7 @@ function App() {
     const [greetMsg, setGreetMsg] = createSignal("");
     const [name, setName] = createSignal("");
     const [showModal, setShowModal] = createSignal(false)
+    const [tab, setTab] = createSignal(0);
 
     async function greet() {
         setGreetMsg(await invoke("greet", { name: name() }));
@@ -38,7 +39,7 @@ function App() {
                     exit={{ opacity: 0, x: 500 }}
                     transition={{ duration: 1, easing: "ease-in-out" }}
                 >
-                    <Systems openModal={() => setShowModal(true)} />
+                    <Systems tab={tab} changeTab={(i: number) => setTab(i)} openModal={() => setShowModal(true)} />
                 </Motion.div>
             default:
                 return <div />

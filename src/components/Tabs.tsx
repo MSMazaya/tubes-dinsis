@@ -1,8 +1,9 @@
-import { createSignal } from 'solid-js'
+import { Accessor, createSignal } from 'solid-js'
 
-function Tabs() {
-    const [currentTab, setCurrentTab] = createSignal(0)
-
+function Tabs({ tab: currentTab, changeTab }: {
+    tab: Accessor<number>,
+    changeTab: (i: number) => void
+}) {
     const tabs = [
         "System 1",
         "System 2",
@@ -20,7 +21,7 @@ function Tabs() {
                         return (
                             <li class="mr-2">
                                 <div
-                                    onClick={() => setCurrentTab(i)}
+                                    onClick={() => changeTab(i)}
                                     class={currentTab() === i ? activeClass : nonActiveClass}
                                 >{tab}</div>
                             </li>

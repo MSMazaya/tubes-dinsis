@@ -1,4 +1,4 @@
-import { createSignal, Show, Switch, onMount } from "solid-js";
+import { createSignal, Show, Switch, onMount, Accessor } from "solid-js";
 import { createStore } from "solid-js/store";
 import { invoke } from "@tauri-apps/api/tauri";
 import { SolidApexCharts, createApexCharts } from "solid-apexcharts";
@@ -16,12 +16,11 @@ function makeArr(startValue: number, stopValue: number, cardinality: number): nu
     return arr;
 }
 
-function Systems({ openModal }: {
-    openModal: () => void
+function Systems({ openModal, tab, changeTab }: {
+    openModal: () => void,
+    changeTab: (i: number) => void,
+    tab: Accessor<number>
 }) {
-    const [page, setPage] = createSignal<Pages>("Home")
-    const [greetMsg, setGreetMsg] = createSignal("");
-    const [name, setName] = createSignal("");
     const [loading, setLoading] = createSignal(false)
 
     const x = makeArr(1, 10, 100)
@@ -105,7 +104,6 @@ function Systems({ openModal }: {
     onMount(async function() {
         await new Promise(r => setTimeout(r, 5000));
         setLoading(true)
-        console.log("done")
     })
 
     return (
@@ -113,7 +111,7 @@ function Systems({ openModal }: {
             <div class="relative py-3 max-w-[50%] sm:mx-auto">
                 <div class="relative px-5 py-5 shadow-lg sm:rounded-3xl sm:p-20 bg-clip-padding bg-opacity-60 border border-gray-200 backdropFilter" style="backdrop-filter: blur(20px);">
                     <div class="mx-auto">
-                        <Tabs />
+                        <Tabs tab={tab} changeTab={changeTab} />
                         <div>
                             <br />
                             <div class="flex justify-between">
