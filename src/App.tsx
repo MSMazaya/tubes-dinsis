@@ -9,6 +9,7 @@ import { Transition } from "solid-js/types/reactive/signal";
 import { Motion, Presence } from "@motionone/solid";
 import Systems from "./components/Systems";
 import Modal from "./components/Modal";
+import { createArgs, defaultArgs, generateSignal } from "./utils/call-sidecar";
 
 function App() {
     const [page, setPage] = createSignal<Pages>("Home")
@@ -16,10 +17,10 @@ function App() {
     const [name, setName] = createSignal("");
     const [showModal, setShowModal] = createSignal(false)
     const [tab, setTab] = createSignal(0);
-
-    async function greet() {
-        setGreetMsg(await invoke("greet", { name: name() }));
-    }
+    const [graphData, setGraphData] = createSignal<{ x: number[], y: number[] }>({
+        x: [],
+        y: []
+    });
 
     function currentPage(page: Pages) {
         switch (page) {
@@ -39,7 +40,11 @@ function App() {
                     exit={{ opacity: 0, x: 500 }}
                     transition={{ duration: 1, easing: "ease-in-out" }}
                 >
-                    <Systems tab={tab} changeTab={(i: number) => setTab(i)} openModal={() => setShowModal(true)} />
+                    <Systems tab={tab} changeTab={(i: number) => {
+                        setTab(i)
+                    }}
+                        graphData={graphData}
+                        openModal={() => setShowModal(true)} />
                 </Motion.div>
             default:
                 return <div />

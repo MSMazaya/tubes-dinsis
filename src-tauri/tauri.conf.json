@@ -12,7 +12,56 @@
   },
   "tauri": {
     "allowlist": {
-      "all": true
+      "all": true,
+      "shell": {
+         "sidecar": true,
+         "scope": [
+           {
+             "name": "../src/script/system-1/dists/main-1",
+             "sidecar": true,
+             "args": [
+                 { "validator": "\\S+" },
+                 { "validator": "\\S+" },
+                 { "validator": "\\S+" },
+                 { "validator": "\\S+" },
+                 { "validator": "\\S+" },
+                 { "validator": "\\S+" },
+                 { "validator": "\\S+" },
+                 { "validator": "\\S+" },
+                 { "validator": "\\S+" },
+                 { "validator": "\\S+" }
+             ]
+           },
+           {
+             "name": "../src/script/system-2/dists/main-2",
+             "sidecar": true,
+             "args": [
+                 { "validator": "\\S+" },
+                 { "validator": "\\S+" },
+                 { "validator": "\\S+" },
+                 { "validator": "\\S+" },
+                 { "validator": "\\S+" },
+                 { "validator": "\\S+" },
+                 { "validator": "\\S+" },
+                 { "validator": "\\S+" }
+             ]
+           },
+           {
+             "name": "../src/script/system-3/dists/main-3",
+             "sidecar": true,
+             "args": [
+                 { "validator": "\\S+" },
+                 { "validator": "\\S+" },
+                 { "validator": "\\S+" },
+                 { "validator": "\\S+" },
+                 { "validator": "\\S+" },
+                 { "validator": "\\S+" },
+                 { "validator": "\\S+" },
+                 { "validator": "\\S+" }
+             ]
+           }
+         ]
+       }
     },
     "bundle": {
       "active": true,
@@ -21,7 +70,11 @@
       "deb": {
         "depends": []
       },
-      "externalBin": [],
+      "externalBin": [
+          "../src/script/system-1/dists/main-1",
+          "../src/script/system-2/dists/main-2",
+          "../src/script/system-3/dists/main-3"
+      ],
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",

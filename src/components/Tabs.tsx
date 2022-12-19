@@ -21,7 +21,7 @@ function Tabs({ tab: currentTab, changeTab }: {
                         return (
                             <li class="mr-2">
                                 <div
-                                    onClick={() => changeTab(i)}
+                                    onClick={async () => await changeTab(i)}
                                     class={currentTab() === i ? activeClass : nonActiveClass}
                                 >{tab}</div>
                             </li>
